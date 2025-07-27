@@ -4,19 +4,22 @@ import 'dotenv/config'
 import { connectDB } from './config/db.js';
 import userRouter from "./routes/userRoute.js"
 
-
-
+// app config
 const app = express();
 const port = 4000;
 
+// middlewares
 app.use(express.json());
 app.use(cors());
+
+// db connection
 connectDB();
+
+// api endpoint
+app.use('/api/user', userRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello')
 });
-
-app.use('/api/user', userRouter)
 
 app.listen(port, () => console.log(`server running on port http://localhost:${port}`));
